@@ -42,8 +42,7 @@ class ImageAnalyzer:
                 visual_features=[
                     self.VisualFeatures.TAGS,
                     self.VisualFeatures.CAPTION,
-                    self.VisualFeatures.OBJECTS,
-                    self.VisualFeatures.LANDMARKS
+                    self.VisualFeatures.OBJECTS
                 ],
                 model_version="latest"
             )
@@ -77,15 +76,19 @@ class ImageAnalyzer:
                     for obj in result.objects.list
                 ]
             
-            # 랜드마크 정보
-            if result.landmarks:
-                analysis["landmarks"] = [
-                    {
-                        "name": landmark.name,
-                        "confidence": landmark.confidence
-                    }
-                    for landmark in result.landmarks.list
-                ]
+            # 랜드마크 정보 (선택적 기능)
+            try:
+                if hasattr(result, 'landmarks') and result.landmarks:
+                    analysis["landmarks"] = [
+                        {
+                            "name": landmark.name,
+                            "confidence": landmark.confidence
+                        }
+                        for landmark in result.landmarks.list
+                    ]
+            except Exception:
+                # 랜드마크 기능이 지원되지 않는 경우 무시
+                analysis["landmarks"] = []
             
             return analysis
             

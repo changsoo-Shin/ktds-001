@@ -53,14 +53,7 @@ Thumbs.db
 # 테스트 파일
 test_azure.py
 
-# 기존 교육 자료 (보안상 제외)
-day1/
-day2/
-day3/
-day4/
-day5/
-day6/
-day7/
-day8/
-day9/
-BestBikeApp/
+# 환경 변수 파일
+.env
+
+

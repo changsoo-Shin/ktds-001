@@ -3,7 +3,9 @@ import os
 from datetime import datetime, timedelta
 from travel_rag import TravelRAG
 from image_analyzer import ImageAnalyzer
+from image_analyzer_safe import SafeImageAnalyzer
 from weather_service import WeatherService
+from weather_service_mock import MockWeatherService
 
 # 페이지 설정
 st.set_page_config(
@@ -144,7 +146,8 @@ def main():
                 st.subheader("🌤️ 현재 날씨")
                 if st.button("날씨 확인", use_container_width=True):
                     try:
-                        weather_service = WeatherService()
+                        # API 문제 시 모의 서비스 사용
+                        weather_service = MockWeatherService()
                         weather = weather_service.get_current_weather(destination)
                         
                         if "error" not in weather:
@@ -183,7 +186,8 @@ def main():
                 if st.button("🔍 이미지 분석하기", type="primary", use_container_width=True):
                     with st.spinner("이미지를 분석하고 있습니다..."):
                         try:
-                            image_analyzer = ImageAnalyzer()
+                            # 더 안전한 이미지 분석기 사용
+                            image_analyzer = SafeImageAnalyzer()
                             image_data = uploaded_file.read()
                             
                             analysis = image_analyzer.analyze_travel_image(image_data)
