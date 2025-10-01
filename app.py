@@ -180,7 +180,7 @@ def main():
             col1, col2 = st.columns(2)
             
             with col1:
-                st.image(uploaded_file, caption="업로드된 이미지", use_column_width=True)
+                st.image(uploaded_file, caption="업로드된 이미지", use_container_width=True)
             
             with col2:
                 if st.button("🔍 이미지 분석하기", type="primary", use_container_width=True):
