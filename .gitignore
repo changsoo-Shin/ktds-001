@@ -40,8 +40,8 @@ ENV/
 .DS_Store
 Thumbs.db
 
-# Streamlit
-.streamlit/
+# Streamlit (배포 시 config.toml은 필요하므로 secrets.toml만 제외)
+.streamlit/secrets.toml
 
 # 로그 파일
 *.log
